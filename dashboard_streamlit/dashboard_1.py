@@ -2,13 +2,22 @@ import streamlit as st
 import requests
 import json
 
-# Définir l'URL de l'API FastAPI
-API_URL = "http://127.0.0.1:8000/predict"
-api_choice = st.sidebar.selectbox("Type d'application",["FastAPI"])
+# Définir les URL de l'API en fonction du choix
+LOCAL_API_URL = "http://127.0.0.1:8000/predict"
+DOCKER_AWS_URL = "http://3.229.137.114:80/predict"
 
 # Interface utilisateur Streamlit
 st.title("Test de l'API de prédiction de solvabilité")
 st.write("Entrez les caractéristiques du client pour obtenir une prédiction :")
+
+# Choix de l'application (API)
+api_choice = st.sidebar.selectbox("Type de test de l'API", ["Local", "Docker/AWS"])
+
+# Sélectionner l'URL en fonction de l'option choisie
+if api_choice == "Local":
+    api_url = LOCAL_API_URL
+else:
+    api_url = DOCKER_AWS_URL
 
 # Création d'un formulaire pour saisir les données d'entrée
 data_input = st.text_area("Données d'entrée (format JSON)", "{}")
@@ -22,13 +31,16 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
 predict_button = st.button("Prédire")
+
 if predict_button:
     try:
         # Convertir le texte en dictionnaire
         input_data = json.loads(data_input)
-        # Envoyer la requête à l'API
-        response = requests.post(API_URL, json=input_data)
+        
+        # Envoyer la requête à l'API sélectionnée
+        response = requests.post(api_url, json=input_data)
         
         if response.status_code == 200:
             prediction = response.json()
