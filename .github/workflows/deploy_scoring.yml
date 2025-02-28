@@ -13,18 +13,19 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python environment
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'  # Choisir la version de Python que tu utilises dans ton projet
+          python-version: '3.12' 
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  
+          pip install -r requirements.txt
 
       - name: Run tests
         run: |
+          export PYTHONPATH=$(pwd)  # Ajoute le répertoire courant au PYTHONPATH
           pytest  # Exécute tous les tests dans le dossier courant
 
       - name: Login to DockerHub
@@ -43,7 +44,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: us-east-1  
 
       - name: Update ECS Service
         run: |
