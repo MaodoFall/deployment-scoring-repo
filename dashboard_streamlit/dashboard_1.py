@@ -4,7 +4,7 @@ import json
 
 # Définir les URL de l'API en fonction du choix
 LOCAL_API_URL = "http://127.0.0.1:8000/predict"
-DOCKER_AWS_URL = "http://3.229.137.114:80/predict"
+DOCKER_AWS_URL = "http://44.222.171.68:80/predict"
 
 # Interface utilisateur Streamlit
 st.title("Test de l'API de prédiction de solvabilité")
