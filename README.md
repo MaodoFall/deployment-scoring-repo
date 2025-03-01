@@ -2,6 +2,8 @@
 
 
 L'objectif du projet est de construire et déployer sur le cloud un modèle de machine learning permettant de vérifier la solvabilité des clients d'une société financière. 
+
+
 J'ai déployé le modèle de scoring sous forme d'API sur AWS ECS(Elastic Container Service) à l'aide de Docker. 
 Ceci permet au modèle d'être accessible via des réquêtes HTTP, facilitant ainsi son utilisation dans différentes applications ou services.
 
