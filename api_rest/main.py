@@ -6,7 +6,7 @@ from fastapi import FastAPI
 import pickle
 
 # Load the pre-trained model
-model = pickle.load(open("api_rest/model/lgbm_model_prod.pkl","rb"))
+model = pickle.load(open("api_rest/best_model/best_lr_undersampling.pkl","rb"))
 # Load the data
 #X_test = pd.read_csv("data/data_test_feature_engine.csv",index_col=0)
 #X_test = X_test.rename(columns = lambda x:re.sub("[^A-Za-z0-9_]+","",x))
